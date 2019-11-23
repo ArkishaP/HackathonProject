@@ -8,16 +8,47 @@
 <title>Insert title here</title>
 </head>
 <body>
-${subject }
+
+<%=session.getAttribute("subject") %>
+<hr>
+<div>
+	<c:set var="count" value="0"/>
+	<c:forEach items="${subject.questions }" var="question">
+		<form action="exam.do" method="POST">
+			<input type="hidden" name="question" value="${subject.questions[count].questionId }"/>
+			<input type="submit" value="${count+1 }"/>
+		</form>
+		<c:set var="count" value="${count+1 }"/>
+<%-- 		<span><c:out value="${count }"/></span> --%>
+	</c:forEach>
+	<span></span>
+</div>
+<div>
+	${question.question }<br>
+	<input type="radio" name="option" value="${question.option1 }">${question.option1 }
+	<input type="radio" name="option" value="${question.option2 }">${question.option2 }
+	<input type="radio" name="option" value="${question.option3 }">${question.option3 }
+	<input type="radio" name="option" value="${question.option4 }">${question.option4 }
+</div>
+${question }
+<br>
+<a href="report.do">Finish Exam</a>
+<%-- ${subject }
 ${student }<br>
 ${exam }<br>
 ${questions }
-<form>
+<hr>
+<form method="POST">
 <c:forEach items="${questions }" var="qrecord">
-	<div>
-	${qrecord.question }
-	</div>
+<div>
+	<label>${qrecord.question}</label>
+	<input type="radio" name="option" value="${qrecord.option1 }">${qrecord.option2 }
+	<input type="radio" name="option" value="${qrecord.option2 }">${qrecord.option2 }
+	<input type="radio" name="option" value="${qrecord.option3 }">${qrecord.option3 }
+	<input type="radio" name="option" value="${qrecord.option4 }">${qrecord.option4 }
+	<input type="submit" value="answer">
 </c:forEach>
-</form>
+</div>
+</form> --%>
 </body>
 </html>

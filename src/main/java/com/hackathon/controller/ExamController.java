@@ -5,10 +5,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hackathon.model.Question;
+import com.hackathon.model.Subject;
 import com.hackathon.service.ExamService;
 
 @Controller
@@ -23,19 +26,46 @@ public class ExamController {
 		mav.setViewName("dashboard");
 		return mav;
 	}
-	
-	@RequestMapping(value="/exam")
-	public ModelAndView redirectToInstructions(HttpServletRequest request, HttpSession session){
+
+	@RequestMapping(value="/instruction")
+	public ModelAndView getInstructions(HttpServletRequest request, HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		String subjectName = request.getParameter("subject");
 		String studentId = (String)session.getAttribute("studentId");
-		String exam = examService.selectExam(studentId, subjectName);
+		
+		//need to find subjectid
+		String subjectId = examService.selectSubjectId(studentId, subjectName);
+		//get subject object
+		Subject subject = examService.getSubject(subjectId);
+		if(subject==null){
+			//send message
+			mav.setViewName("redirect:/dashboard.do");
+		}else{
+			session.setAttribute("subject", subject);
+			mav.addObject("subject", subject);
+			mav.setViewName("instructions");
+		}
+/*		String exam = examService.selectExam(studentId, subjectName);
 		mav.addObject("subject", subjectName);
 		mav.addObject("exam",exam);
-		mav.setViewName("instructions");
+		mav.setViewName("instructions");*/
+		
 		return mav;
 	}
 	
+	@RequestMapping(value="/exam", method=RequestMethod.POST)
+	public ModelAndView startExam(HttpServletRequest request, HttpSession session){
+		ModelAndView mav = new ModelAndView();
+		String questionId = request.getParameter("question");
+		Subject subject = (Subject) session.getAttribute("subject");
+		//fetch question from questionid
+		Question question = examService.getQuestion(questionId);
+		mav.addObject("subject", subject);
+		mav.addObject("question",question);
+		mav.setViewName("exampage");
+		return mav;
+	}
+/*	
 	@RequestMapping(value="/startexam", method=RequestMethod.GET)
 	public ModelAndView redirectToExamPage(HttpServletRequest request, HttpSession session){
 		ModelAndView mav = new ModelAndView("exampage");
@@ -50,5 +80,5 @@ public class ExamController {
 		
 		return mav;
 	}
-	
+	*/
 }
