@@ -275,7 +275,8 @@ body {
          var date2=new Date(dob);
          if(date1.getFullYear()-date2.getFullYear()<18)
          {   
-		id7.innerHTML="AGE SHOULD BE 18 YEARS";
+			id7.innerHTML="AGE SHOULD BE 18 YEARS";
+			flag=false;
 		}
 		}
         

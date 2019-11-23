@@ -66,7 +66,7 @@ public class StudentController {
 			else
 			
 			mav.setViewName("StudentRegistration2");
-			mav.addObject("message","Not Registered");
+			
 		return mav;
 		
 
