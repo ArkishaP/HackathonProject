@@ -11,10 +11,6 @@
 ${subject.difficulty }
 The exam will be of ${subject.duration } minutes.
 ${subject.subjectId }
-<form action="exam.do" method="POST">
-	<input type="hidden" name="question" value="${subject.questions[0].questionId }">
-	<br>
-	<input type="submit" value="Start Exam">
-</form>
+<a href="startexam.do">Start Exam</a>
 </body>
 </html>

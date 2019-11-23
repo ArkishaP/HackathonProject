@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.hackathon.model.Exam;
 import com.hackathon.model.Question;
+import com.hackathon.model.Student;
 import com.hackathon.model.Subject;
 
 public interface ExamDao {
@@ -22,6 +23,13 @@ public interface ExamDao {
 	
 	//fetch question for id
 	public Question getQuestion(String questionId);
+	
+	//get student for id
+	public Student getStudent(String studentId);
+	
+	//create Exam
+	public void createExam(Exam exam);
+	
 	/*
 	// get list of difficulty given a subject name
 	public List<String> getDifficulty(String subjectName);

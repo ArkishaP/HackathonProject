@@ -66,6 +66,17 @@ public class ExamDaoImpl implements ExamDao {
 		Question question = em.find(Question.class, questionId);
 		return question;
 	}
+	
+	//get student for id
+	public Student getStudent(String studentId) {
+		Student student = em.find(Student.class, studentId);
+		return student;
+	}
+		
+	//create Exam
+	public void createExam(Exam exam) {
+		em.persist(exam);
+	}
 /*
 	// get list of difficulty given a subject name
 	@SuppressWarnings("unchecked")

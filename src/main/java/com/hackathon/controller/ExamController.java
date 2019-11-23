@@ -1,5 +1,8 @@
 package com.hackathon.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -10,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hackathon.model.Exam;
 import com.hackathon.model.Question;
+import com.hackathon.model.Student;
 import com.hackathon.model.Subject;
 import com.hackathon.service.ExamService;
 
@@ -53,16 +58,51 @@ public class ExamController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/startexam")
+	public ModelAndView startExam(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		//get subject and student -> create exam
+		String studentId = (String) session.getAttribute("studentId");
+		Student student = examService.getStudent(studentId);
+		Subject subject = (Subject) session.getAttribute("subject");
+		//create new exam
+		Exam exam = new Exam();
+		exam.setStudent(student);
+		exam.setSubject(subject);
+		exam.setExamId("E0001");
+		examService.createExam(exam);
+		mav.addObject("subject", subject);
+		session.setAttribute("exam", exam);
+		Map<String, String> questionmap = new HashMap<String, String>();
+		for(Question question:subject.getQuestions()) {
+			questionmap.put(question.getQuestionId(), "");
+		}
+		session.setAttribute("questionmap", questionmap);
+		mav.setViewName("startexam");
+		return mav;
+	}
+	
 	@RequestMapping(value="/exam", method=RequestMethod.POST)
 	public ModelAndView startExam(HttpServletRequest request, HttpSession session){
 		ModelAndView mav = new ModelAndView();
-		String questionId = request.getParameter("question");
 		Subject subject = (Subject) session.getAttribute("subject");
-		//fetch question from questionid
+		String questionId = request.getParameter("question");
 		Question question = examService.getQuestion(questionId);
 		mav.addObject("subject", subject);
 		mav.addObject("question",question);
 		mav.setViewName("exampage");
+		return mav;
+	}
+	
+	@RequestMapping(value="/setanswer", method = RequestMethod.POST)
+	public ModelAndView setAnswer(HttpServletRequest request, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		String questionId = request.getParameter("questionId");
+		String studentAnswer = request.getParameter("option");
+		Map<String, String> questionmap = (Map<String, String>) session.getAttribute("questionmap");
+		questionmap.replace(questionId, studentAnswer);
+		mav.addObject("");
+		mav.setViewName("redirect:/exam.do");
 		return mav;
 	}
 /*	

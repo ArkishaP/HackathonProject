@@ -67,10 +67,10 @@ import com.hackathon.service.FileUploadService;
 	        	
 	            // Get the file and save it somewhere
 	            byte[] bytes = file.getBytes();
-	            Path path = Paths.get("C://temp//" + filename);
+	            Path path = Paths.get("C://tmp//" + filename);
 	            Files.write(path, bytes);
 	            
-	            fileUploadService.uploadFileData("C://temp//"+path.getFileName(),subid);
+	            fileUploadService.uploadFileData("C://tmp//"+path.getFileName(),subid);
 
 	            redirectAttributes.addFlashAttribute("message", 
 	                        "You successfully uploaded '" + file.getOriginalFilename() + "'");

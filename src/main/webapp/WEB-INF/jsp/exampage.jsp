@@ -6,12 +6,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<script type="text/javascript" src="./resources/js/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("input[type='radio']").click(function(){
+			$(".question-form").submit();
+		});
+	});
+</script>
 </head>
 <body>
 
 <%=session.getAttribute("subject") %>
 <hr>
 <div>
+	${questionmap }<br>
 	<c:set var="count" value="0"/>
 	<c:forEach items="${subject.questions }" var="question">
 		<form action="exam.do" method="POST">
@@ -24,11 +33,14 @@
 	<span></span>
 </div>
 <div>
+	<form class="question-form" action="setanswer.do" method="POST">
 	${question.question }<br>
+	<input type="hidden" name="questionId" value="${question.questionId }"/>
 	<input type="radio" name="option" value="${question.option1 }">${question.option1 }
 	<input type="radio" name="option" value="${question.option2 }">${question.option2 }
 	<input type="radio" name="option" value="${question.option3 }">${question.option3 }
 	<input type="radio" name="option" value="${question.option4 }">${question.option4 }
+	</form>
 </div>
 ${question }
 <br>

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.hackathon.dao.ExamDao;
 import com.hackathon.model.Exam;
 import com.hackathon.model.Question;
+import com.hackathon.model.Student;
 import com.hackathon.model.Subject;
 
 @Service("examService")
@@ -48,6 +49,14 @@ public class ExamServiceImpl implements ExamService {
 	public Question getQuestion(String questionId){
 		return examDao.getQuestion(questionId);
 	}
+	
+	@Transactional
+	//get student for id
+	public Student getStudent(String studentId) { return examDao.getStudent(studentId);}
+		
+	@Transactional
+	//create Exam
+	public void createExam(Exam exam) { examDao.createExam(exam);}
 /*	
 	@Transactional
 	public String selectExam(String studentId, String subjectName){
