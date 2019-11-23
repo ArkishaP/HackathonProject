@@ -5,16 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Repository;
 
 import com.hackathon.model.Question;
-import com.hackathon.model.Student;
-import com.hackathon.model.Subject;
 
 
 @Repository("fileUploadDao")
@@ -54,27 +50,5 @@ public class FileUploadDao extends BaseDao{
 		return true;
 		
 	}
-	
-	/*public boolean removeCollege(String cid)
-	{
-		boolean flag = false;
-		Subject sub =null;
-		try {
-			Query q = em.createQuery ("DELETE s FROM Subscription s WHERE s.subscriptionDate < :today");
-			q.setParameter ("today", new Date ());
-			int deleted = q.executeUpdate ();
-			//Query query = em.createQuery("Delete Student u set u.password=:npwd where u.studentid=:studentid and u.password=:opwd");
-			Query query = em.createQuery("Delete q from Question q where q.questionFile=:file");
-			query.setParameter("file", new Question());
-			int deleted = query.executeUpdate ();
-		
-			
-			if(rs>0) flag=true;
-	}
-		catch (Exception e) {
-			System.out.println(e);
-		}
-		return flag;
-	}*/
 
 }

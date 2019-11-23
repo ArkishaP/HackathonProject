@@ -2,6 +2,7 @@ package com.hackathon.controller;
 
 import java.text.ParseException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hackathon.dao.AdminDaoIntf;
 import com.hackathon.model.Admin;
+import com.hackathon.model.Student;
 import com.hackathon.model.Subject;
 import com.hackathon.service.AdminServiceIntf;
 @Controller
@@ -41,17 +43,19 @@ public class AdminController {
         boolean flag=adminservice.loginAdmin(admin);
 		
 		ModelAndView mav=new ModelAndView();
-		if(flag){
+		if(flag)
+			{
+			mav.setViewName("redirect:/adminLogin.do");
+			HttpSession session = request.getSession();
+			session.setAttribute("username", username);
 			mav.setViewName("AdminDashboard");
-			mav.addObject("message", "");
 			}
 			else
+			
 			{
-				mav.addObject("message","Invalid Credential");
 				mav.setViewName("Adminlogin");
+				mav.addObject("message","Invalid Credentials");
 			}
-			
-			
 		  
 		return mav;
 	  }
@@ -65,7 +69,7 @@ public class AdminController {
 	}
 	
 	
-	/*@RequestMapping(value="/addsubject", method=RequestMethod.POST)
+	@RequestMapping(value="/addsubject", method=RequestMethod.POST)
 	public ModelAndView addSubject(HttpServletRequest request) throws ParseException{
 		
 		
@@ -94,5 +98,13 @@ public class AdminController {
 		return mav;
 		
 
-	}*/
+	}
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public ModelAndView userlogout(HttpServletRequest request) {
+		 HttpSession session =request.getSession(false);
+		 session.invalidate();
+		 ModelAndView mav = new ModelAndView("Adminlogin");
+		 mav.addObject("Adminlogin");
+		 return mav;
+	 }
 }

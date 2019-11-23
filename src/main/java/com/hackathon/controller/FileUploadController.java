@@ -85,7 +85,10 @@ import com.hackathon.service.FileUploadService;
 	        return new ModelAndView("upload","message", "You successfully uploaded '" + file.getOriginalFilename() + "'");
 	    }
 		
-		
+		@RequestMapping(value="/test", method=RequestMethod.POST)
+		public void test(HttpServletRequest request){
+			System.out.println("Here");
+		}
 	}
 
 

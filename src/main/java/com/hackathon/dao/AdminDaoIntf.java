@@ -6,5 +6,5 @@ import com.hackathon.model.Subject;
 public interface AdminDaoIntf {
 	public boolean loginAdmin(Admin admin);
 	public boolean addSubject(Subject subject);
-
+	
 }

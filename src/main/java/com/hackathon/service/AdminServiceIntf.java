@@ -8,6 +8,4 @@ public interface AdminServiceIntf {
 	public boolean loginAdmin(Admin admin);
 	public boolean addSubject(Subject subject);
 
-	
-
 }
