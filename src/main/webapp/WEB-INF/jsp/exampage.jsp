@@ -9,8 +9,10 @@
 <script type="text/javascript" src="./resources/js/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("input[type='radio']").click(function(){
+		$(".questiono-form").click(function(e){
+			e.preventDefault();
 			$(".question-form").submit();
+			this.submit();
 		});
 	});
 </script>
@@ -23,14 +25,12 @@
 	${questionmap }<br>
 	<c:set var="count" value="0"/>
 	<c:forEach items="${subject.questions }" var="question">
-		<form action="exam.do" method="POST">
+		<form action="exam.do" method="POST" class="questiono-form">
 			<input type="hidden" name="question" value="${subject.questions[count].questionId }"/>
 			<input type="submit" value="${count+1 }"/>
 		</form>
 		<c:set var="count" value="${count+1 }"/>
-<%-- 		<span><c:out value="${count }"/></span> --%>
 	</c:forEach>
-	<span></span>
 </div>
 <div>
 	<form class="question-form" action="setanswer.do" method="POST">
@@ -45,22 +45,6 @@
 ${question }
 <br>
 <a href="report.do">Finish Exam</a>
-<%-- ${subject }
-${student }<br>
-${exam }<br>
-${questions }
-<hr>
-<form method="POST">
-<c:forEach items="${questions }" var="qrecord">
-<div>
-	<label>${qrecord.question}</label>
-	<input type="radio" name="option" value="${qrecord.option1 }">${qrecord.option2 }
-	<input type="radio" name="option" value="${qrecord.option2 }">${qrecord.option2 }
-	<input type="radio" name="option" value="${qrecord.option3 }">${qrecord.option3 }
-	<input type="radio" name="option" value="${qrecord.option4 }">${qrecord.option4 }
-	<input type="submit" value="answer">
-</c:forEach>
-</div>
-</form> --%>
+
 </body>
 </html>
