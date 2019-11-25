@@ -1,15 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" isELIgnored="false"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Searched Student</title>
 </head>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>
 
+<body bgcolor="#FFF0F5">
+<script>
+function myfun(){
+	window.location="adminLogin.do";
+}
 
-<body>
+</script>
+<button type="submit" name="logout" id="b2" value="text" style="float:right" onclick="myfun();">LOGOUT</button>
+<center><h1>---:SEARCHED STUDENT REPORT:--</h1>
+
 <table>
+
 <tr>
 <th><b>Student ID </b></th>
 <th><b>Student's First Name </b></th>
@@ -31,20 +49,20 @@
 <c:forEach items="${stlist}" var="search">
   
  <tr>   
-<td>${report[0]}</td>
-<td>${report[1]}</td> 
-<td>${report[2]}</td> 
-<td>${report[3]}</td> 
-<td>${report[4]}</td>
-<td>${report[5]}</td> 
-<td>${report[6]}</td>
-<td>${report[7]}</td>
-<td>${report[8]}</td>
-<td>${report[9]}</td>
-<td>${report[10]}</td>
-<td>${report[11]}</td>
-<td>${report[12]}</td>
-<td>${report[13]}</td>
+<td>${search[0]}</td> 
+<td>${search[1]}</td> 
+<td>${search[2]}</td> 
+<td>${search[3]}</td> 
+<td>${search[4]}</td>
+<td>${search[5]}</td> 
+<td>${search[6]}</td>
+<td>${search[7]}</td>
+<td>${search[8]}</td>
+<td>${search[9]}</td>
+<td>${search[10]}</td>
+<td>${search[11]}</td>
+<td>${search[12]}</td>
+<td>${search[13]}</td> 
 
 </tr>  
                
@@ -52,7 +70,7 @@
 </table>
 
 
-
+</center>
 
 </body>
 </html>

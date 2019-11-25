@@ -18,8 +18,16 @@ public List<Object[]> getReport(String studentId){
 	  return rlist;
 }
 @Transactional
-public List<Object[]> searchStudent(String subjectName,String difficulty,int score){
-	return reportDao.searchStudent(subjectName, difficulty, score);
+public List<Object[]> searchStudent(String subName,String difficulty,int score){
+	return reportDao.searchStudent(subName, difficulty, score);
 }
-	 
+
+@Transactional
+public List<String> getSubjectlist(){
+	  return reportDao.getSubjectlist();
+}
+@Transactional
+public List<String> getDifficultylist(){
+	  return reportDao.getDifficultylist();
+} 
 }

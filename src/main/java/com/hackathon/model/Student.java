@@ -18,7 +18,8 @@ import javax.persistence.TemporalType;
 		birth_date DATE,
 		city VARCHAR2(50),
 		state VARCHAR2(50),
-		contact_number VARCHAR2(10)	
+		contact_number VARCHAR2(10),
+		file_name VARCHAR2(100)	
 	);*/
 
 @Entity
@@ -40,9 +41,18 @@ public class Student {
 	private String state;
 	@Column(name="contact_number")
 	private String contactNumber;
-	
+	@Column(name="file_name")
+	private String fileName;
 	public Student() {
 		super();
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	public String getStudentId() {

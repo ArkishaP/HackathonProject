@@ -16,11 +16,9 @@ public class ReportDaoImpl implements ReportDao{
 	 public List<Object[]> getReport(String studentId){
 		 
 		 
-			//String sql="SELECT st.studentId,st.first_name,su.subjectName,su.difficulty,r.id,r.score,e.examId FROM Student st,Subject su,Report r,Exam e  where st.studentId=e.studentId and su.subjectId=e.subjectId and e.examId=r.examId "  ;
 			 @SuppressWarnings("unchecked")
 			 String sql="SELECT st.id sid,st.first_name,su.name,su.difficulty,r.id scoreid,r.score,e.id examid FROM Student st,Subject su,score r,Exam e  where st.id=e.student_id and su.id=e.subject_id and e.id=r.exam_id and st.id=:id1";
 
-	//			List<Object[]> result = em.createNativeQuery("SELECT st.id,st.first_name,su.name,su.difficulty,r.id,r.score,e.id FROM Student st,Subject su,score r,Exam e  where st.id=e.student_id and su.id=e.subject_id and e.id=r.exam_id" ).getResultList();
 
 			 List<Object[]> result = em.createNativeQuery(sql).setParameter("id1", studentId).getResultList();      
 			for( Object[] i: result)
@@ -37,12 +35,25 @@ public class ReportDaoImpl implements ReportDao{
 			return result;
 		  }
 
-		public List<Object[]> searchStudent(String subjectName,String difficulty,int score){
+		public List<Object[]> searchStudent(String subName,String difficulty,int score){
 			  @SuppressWarnings("unchecked")
-			  String sql="SELECT * FROM Student st,Subject su,Exam e,Score r where st.id=e.student_id and su.id=e.subject_id and e.id=r.exam_id  and su.subject_name=:subName and su.difficulty=:level and r.score=:score" ;
-				 List<Object[]> search= em.createNativeQuery(sql).setParameter("subName", subjectName).setParameter("level", difficulty).setParameter("score", score).getResultList(); 
-
+			  String sql="SELECT st.id stid,st.first_name ,st.gender ,st.email, st.birth_date ,st.city ,st.state ,st.contact_number ,su.name ,su.difficulty ,e.id eid,e.date_of_exam ,e.time_taken ,r.score FROM Student st,Subject su,Exam e,Score r where st.id=e.student_id and su.id=e.subject_id and e.id=r.exam_id  and upper(su.name)=upper(:subName) and upper(su.difficulty)=upper(:difficulty) and r.score=:score" ;
+				 List<Object[]> search= em.createNativeQuery(sql).setParameter("subName", subName).setParameter("difficulty", difficulty).setParameter("score", score).getResultList(); 
+				 System.out.println(search.size());
+				 
 					return search;
 		}
+		public List<String> getSubjectlist(){
+			  @SuppressWarnings("unchecked")
+			List<String> sub  = em.createNativeQuery("SELECT distinct name FROM  subject")
+					  .getResultList();
+			  return  sub;
+		  }
+		public List<String> getDifficultylist(){
+			  @SuppressWarnings("unchecked")
+			List<String> diff  = em.createNativeQuery("SELECT distinct difficulty FROM  subject")
+					  .getResultList();
+			  return  diff;
+		  }
 
 }
