@@ -9,9 +9,10 @@
 <script type="text/javascript" src="./resources/js/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$(".questiono-form").click(function(e){
+		$(".questiono-form").submit(function(e){
 			e.preventDefault();
-			$(".question-form").submit();
+			$(".questionId").val($(".question").val());
+			$(".response").val($("input[name=option]:checked").val());
 			this.submit();
 		});
 	});
@@ -20,6 +21,9 @@
 <body>
 
 <%=session.getAttribute("subject") %>
+<%
+	
+%>
 <hr>
 <div>
 	${questionmap }<br>
@@ -27,20 +31,22 @@
 	<c:forEach items="${subject.questions }" var="question">
 		<form action="exam.do" method="POST" class="questiono-form">
 			<input type="hidden" name="question" value="${subject.questions[count].questionId }"/>
+			<input type="hidden" name="questionId" class="questionId" value=""/>
+			<input type="hidden" name="response" class="response" value=""/>
 			<input type="submit" value="${count+1 }"/>
 		</form>
 		<c:set var="count" value="${count+1 }"/>
 	</c:forEach>
 </div>
 <div>
-	<form class="question-form" action="setanswer.do" method="POST">
+<!-- 	<form class="question-form" action="setanswer.do" method="POST"> -->
 	${question.question }<br>
-	<input type="hidden" name="questionId" value="${question.questionId }"/>
+	<input type="hidden" name="questionId" class="question" value="${question.questionId }"/>
 	<input type="radio" name="option" value="${question.option1 }">${question.option1 }
 	<input type="radio" name="option" value="${question.option2 }">${question.option2 }
 	<input type="radio" name="option" value="${question.option3 }">${question.option3 }
 	<input type="radio" name="option" value="${question.option4 }">${question.option4 }
-	</form>
+<!-- 	</form> -->
 </div>
 ${question }
 <br>

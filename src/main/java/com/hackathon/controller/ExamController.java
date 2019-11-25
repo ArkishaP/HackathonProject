@@ -9,9 +9,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hackathon.model.Exam;
 import com.hackathon.model.Question;
@@ -86,25 +88,34 @@ public class ExamController {
 	public ModelAndView startExam(HttpServletRequest request, HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		Subject subject = (Subject) session.getAttribute("subject");
-		String questionId = request.getParameter("question");
-		Question question = examService.getQuestion(questionId);
+		String questionNo = request.getParameter("question");
+		Question question = examService.getQuestion(questionNo);
 		mav.addObject("subject", subject);
 		mav.addObject("question",question);
+		
+		String questionId = request.getParameter("questionId");
+		String studentAnswer = request.getParameter("response");
+		if(questionId!=null){
+			Map<String, String> questionmap = (Map<String, String>) session.getAttribute("questionmap");
+			questionmap.replace(questionId, studentAnswer);
+		}
 		mav.setViewName("exampage");
 		return mav;
 	}
 	
-	@RequestMapping(value="/setanswer", method = RequestMethod.POST)
-	public ModelAndView setAnswer(HttpServletRequest request, HttpSession session) {
+	/*@RequestMapping(value="/setanswer", method = RequestMethod.POST)
+	public ModelAndView setAnswer(HttpServletRequest request, HttpSession session, RedirectAttributes ra) {
 		ModelAndView mav = new ModelAndView();
+		String questionNo = request.getParameter("questionno");
 		String questionId = request.getParameter("questionId");
 		String studentAnswer = request.getParameter("option");
 		Map<String, String> questionmap = (Map<String, String>) session.getAttribute("questionmap");
 		questionmap.replace(questionId, studentAnswer);
+		ra.addFlashAttribute("questionno", questionNo);
 		mav.addObject("");
 		mav.setViewName("redirect:/exam.do");
 		return mav;
-	}
+	}*/
 /*	
 	@RequestMapping(value="/startexam", method=RequestMethod.GET)
 	public ModelAndView redirectToExamPage(HttpServletRequest request, HttpSession session){

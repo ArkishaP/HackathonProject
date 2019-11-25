@@ -26,7 +26,7 @@ public class FileUploadDao extends BaseDao{
 			
 				for(Question vo : list){
 					Map<String, String> paramMap = new HashMap<String,String>();
-					paramMap.put("Question_no", vo.getQuestionId());
+					paramMap.put("Question_no", subjectId+vo.getQuestionId());
 					paramMap.put("Question", vo.getQuestion());
 					paramMap.put("Option1", vo.getOption1());
 					paramMap.put("Option2", vo.getOption2());
