@@ -33,6 +33,22 @@ $(window).on('pageshow', function() {
 	console.log(option);
 });
 	$(document).ready(function(){
+		//countdown timer - seconds
+		var starttime = ${startTime};
+		var interval = setInterval(function() {
+		var timer = timer2.split(':');
+		//by parsing integer, I avoid all extra string processing
+		var minutes = parseInt(timer[0], 10);
+		var seconds = parseInt(timer[1], 10);
+	 	--seconds;
+	 	minutes = (seconds < 0) ? --minutes : minutes;
+	 	if (minutes < 0) clearInterval(interval);
+	 	seconds = (seconds < 0) ? 59 : seconds;
+	 	seconds = (seconds < 10) ? '0' + seconds : seconds;
+	 	//minutes = (minutes < 10) ?  minutes : minutes;
+	 	$('#countdown').html(minutes + ':' + seconds);
+	 	timer2 = minutes + ':' + seconds;
+		}, 1000);
 		$(".questiono-form").submit(function(e){
 			e.preventDefault();
 			
@@ -41,23 +57,8 @@ $(window).on('pageshow', function() {
 			this.submit();
 		});
 	});
-	//countdown timer - seconds
-	function startTimer(duration, display) {
-	    var timer = duration, minutes, seconds;
-	    setInterval(function () {
-	        minutes = parseInt(timer / 60, 10)
-	        seconds = parseInt(timer % 60, 10);
+	
 
-	        minutes = minutes < 10 ? "0" + minutes : minutes;
-	        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-	        display.text(minutes + ":" + seconds);
-
-	        if (--timer < 0) {
-	            $(".finish").click();
-	        }
-	    }, 1000);
-	}
 	jQuery(function ($) {
 	    var fiveMinutes = 5,
 	        display = $('#countdown');
@@ -66,7 +67,6 @@ $(window).on('pageshow', function() {
 </script>
 </head>
 <body>
-
 <%=session.getAttribute("subject") %>
 <%
 	

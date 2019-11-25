@@ -89,6 +89,7 @@ public class ExamDaoImpl implements ExamDao {
 		em.persist(answer);
 		return true;
 	}
+	
 /*
 	// get list of difficulty given a subject name
 	@SuppressWarnings("unchecked")

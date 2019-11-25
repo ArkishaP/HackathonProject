@@ -69,6 +69,8 @@ public class ExamController {
 		String studentId = (String) session.getAttribute("studentId");
 		Student student = examService.getStudent(studentId);
 		Subject subject = (Subject) session.getAttribute("subject");
+		int duration = subject.getDuration();
+		String startTime = duration+":00";
 		//create new exam
 		Exam exam = new Exam();
 		exam.setStudent(student);
@@ -81,6 +83,7 @@ public class ExamController {
 		for(Question question:subject.getQuestions()) {
 			questionmap.put(question.getQuestionId(), "");
 		}
+		session.setAttribute("startTime", startTime);
 		session.setAttribute("questionmap", questionmap);
 		mav.setViewName("startexam");
 		return mav;

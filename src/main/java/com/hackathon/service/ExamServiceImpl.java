@@ -70,13 +70,18 @@ public class ExamServiceImpl implements ExamService {
 			//Exam exam = examDao.getExam(examId);
 			String questionId = (String)mapElement.getKey();
 			String response = (String)mapElement.getValue();
+			if(response.equals(examDao.getQuestion(questionId).getCorrectAnswer())) {
+				answer.setCorrect("true");
+			}else {
+				answer.setCorrect("false");
+			}
 			Question question = examDao.getQuestion(questionId);
-			String correct = question.getCorrectAnswer();
+//			String correct = question.getCorrectAnswer();
 			answer.setAnswerId(exam.getExamId()+questionId);
 			answer.setExam(exam);
 			answer.setQuestion(question);
 			answer.setResponse(response);
-			answer.setCorrect(correct);
+//			answer.setCorrect(correct);
 			flag = examDao.addAnswer(answer);
 			
 			
@@ -94,7 +99,7 @@ public class ExamServiceImpl implements ExamService {
 		List<Answer> answers = new ArrayList<Answer>();
 		answers = examDao.getAnswers(exam);
 		for(Answer answer:answers){
-			if(answer.getResponse().equals(answer.getCorrect())){
+			if(answer.getCorrect().equals("true")){
 				calculated++;
 			}
 		}
