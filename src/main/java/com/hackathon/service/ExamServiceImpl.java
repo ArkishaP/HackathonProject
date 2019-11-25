@@ -2,14 +2,17 @@ package com.hackathon.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hackathon.dao.ExamDao;
+import com.hackathon.model.Answer;
 import com.hackathon.model.Exam;
 import com.hackathon.model.Question;
+import com.hackathon.model.Score;
 import com.hackathon.model.Student;
 import com.hackathon.model.Subject;
 
@@ -57,6 +60,48 @@ public class ExamServiceImpl implements ExamService {
 	@Transactional
 	//create Exam
 	public void createExam(Exam exam) { examDao.createExam(exam);}
+	
+	@Transactional
+	public boolean finishExam(Map<String, String> questionmap, Exam exam) {
+		boolean flag = false;
+		for (Map.Entry mapElement : questionmap.entrySet()) {
+			
+			Answer answer = new Answer();
+			//Exam exam = examDao.getExam(examId);
+			String questionId = (String)mapElement.getKey();
+			String response = (String)mapElement.getValue();
+			Question question = examDao.getQuestion(questionId);
+			String correct = question.getCorrectAnswer();
+			answer.setAnswerId(exam.getExamId()+questionId);
+			answer.setExam(exam);
+			answer.setQuestion(question);
+			answer.setResponse(response);
+			answer.setCorrect(correct);
+			flag = examDao.addAnswer(answer);
+			
+			
+        } 
+		return flag;
+	}
+	
+	@Transactional
+	//
+	public Score calculateScore(Exam exam){
+		Score score =  new Score();
+		int calculated=0;
+		score.setScoreId("S"+exam.getExamId());
+		score.setExam(exam);
+		List<Answer> answers = new ArrayList<Answer>();
+		answers = examDao.getAnswers(exam);
+		for(Answer answer:answers){
+			if(answer.getResponse().equals(answer.getCorrect())){
+				calculated++;
+			}
+		}
+		score.setScore((calculated*100)/answers.size());
+		examDao.createScore(score);
+		return score;
+	}
 /*	
 	@Transactional
 	public String selectExam(String studentId, String subjectName){
@@ -114,4 +159,6 @@ public class ExamServiceImpl implements ExamService {
 		return examDao.getQuestions(subjectId);
 	}
 */
+
+	
 }

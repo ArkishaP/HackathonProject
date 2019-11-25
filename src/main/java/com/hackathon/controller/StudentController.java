@@ -103,31 +103,66 @@ public class StudentController {
 			mav.addObject("message","Invalid Details");
 		return mav;
 	  }
+	@RequestMapping(value = "/studentlogout", method = RequestMethod.GET)
+	public ModelAndView studentlogout(HttpServletRequest request) {
+		 HttpSession session =request.getSession(false);
+		 session.invalidate();
+		 ModelAndView mav = new ModelAndView();
+		 /*mav.addObject("login2");*/
+		 mav.setViewName("login2");
+		 return mav;
+	 }
+	
+	
 	@RequestMapping(value = "/changepwd", method = RequestMethod.GET)
 	  public ModelAndView changepwd1(HttpServletRequest request, HttpServletResponse response) {
-	    ModelAndView mav = new ModelAndView("changepwd");
+	    ModelAndView mav = new ModelAndView("ChangePassword");
 	    return mav;
 	  }
 	
 	
-	/*@RequestMapping(value = "/changepwd", method = RequestMethod.POST)
-	  public ModelAndView changepwd2(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-    String username=(String)session.getAttribute("studentid");
-    String opwd= request.getParameter("opassword");
-    String npwd= request.getParameter("npassword");
-    System.out.println(username+"  "+opwd+"  "+npwd);
-	boolean flag = studentService.changepwd(studentid,opwd,npwd);
+	@RequestMapping(value = "/changepwd", method = RequestMethod.POST)
+	  public ModelAndView changepwd1(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+    String studentId=(String)session.getAttribute("studentId");
+    String opassword= request.getParameter("opassword");
+    String npassword= request.getParameter("npassword");
+    
+	boolean flag = studentService.changepwd(studentId,opassword,npassword);
     if(flag) {
-	       ModelAndView mav = new ModelAndView("changepwd");
-	       mav.addObject("message", "Password is successfully updated");
+	       ModelAndView mav = new ModelAndView("login2");
+	       /*mav.addObject("message", "Password is successfully updated");*/
 	       return mav;
 	  }
     else {
-    	ModelAndView mav = new ModelAndView("changepwd");
-	       mav.addObject("message", "Password is not updated");
+    	ModelAndView mav = new ModelAndView("ChangePassword");
+	       mav.addObject("message", "Please Enter Correct Details");
 	       return mav;
     }
-	}*/
-
-
+	}
+	
+	@RequestMapping(value = "/changepassword", method = RequestMethod.GET)
+	  public ModelAndView changepassword1(HttpServletRequest request, HttpServletResponse response) {
+	    ModelAndView mav = new ModelAndView("ChangeUserPassword");
+	    return mav;
+	  }
+	
+	
+	@RequestMapping(value = "/changepassword", method = RequestMethod.POST)
+	  public ModelAndView changepassword1(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+  String studentId=(String)session.getAttribute("studentId");
+  String opassword= request.getParameter("opassword");
+  String npassword= request.getParameter("npassword");
+  
+	boolean flag = studentService.changepassword(studentId,opassword,npassword);
+  if(flag) {
+	       ModelAndView mav = new ModelAndView("login2");
+	       /*mav.addObject("message", "Password is successfully updated");*/
+	       return mav;
+	  }
+  else {
+  	ModelAndView mav = new ModelAndView("ChangeUserPassword");
+	       mav.addObject("message", "Please Enter Correct Details");
+	       return mav;
+  }
+	}
 }

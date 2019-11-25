@@ -2,8 +2,10 @@ package com.hackathon.dao;
 
 import java.util.List;
 
+import com.hackathon.model.Answer;
 import com.hackathon.model.Exam;
 import com.hackathon.model.Question;
+import com.hackathon.model.Score;
 import com.hackathon.model.Student;
 import com.hackathon.model.Subject;
 
@@ -30,6 +32,12 @@ public interface ExamDao {
 	//create Exam
 	public void createExam(Exam exam);
 	
+	//get exam for id
+	public Exam getExam(String examId);
+	public boolean addAnswer(Answer answer);
+	public List<Answer> getAnswers(Exam exam);
+	
+	public void createScore(Score score);
 	/*
 	// get list of difficulty given a subject name
 	public List<String> getDifficulty(String subjectName);

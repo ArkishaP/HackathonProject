@@ -1,9 +1,11 @@
 package com.hackathon.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.hackathon.model.Exam;
 import com.hackathon.model.Question;
+import com.hackathon.model.Score;
 import com.hackathon.model.Student;
 import com.hackathon.model.Subject;
 
@@ -26,6 +28,11 @@ public interface ExamService {
 		
 	//create Exam
 	public void createExam(Exam exam);
+	
+	public boolean finishExam(Map<String, String> questionmap, Exam exam);
+	
+	//
+	public Score calculateScore(Exam exam);
 /*	
 	//method to select level for student returns subjectId
 	public String selectExam(String studentId, String subjectName);

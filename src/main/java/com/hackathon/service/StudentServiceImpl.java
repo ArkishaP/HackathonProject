@@ -22,9 +22,13 @@ public class StudentServiceImpl implements StudentService {
 	public boolean loginStudent(Student student) {
 		return studentDao.loginStudent(student);
 	}
-
-/*	 public boolean changepwd(String studentid,String opwd, String npwd) {
-		  return studentDao.changepwd(studentid, opwd,  npwd);
-	  }*/
-
+	
+	@Transactional
+	 public boolean changepwd(String studentId,String opassword, String npassword) {
+		  return studentDao.changepwd(studentId, opassword,  npassword);
+	  }
+	@Transactional
+	 public boolean changepassword(String studentId,String opassword, String npassword) {
+		  return studentDao.changepassword( studentId,opassword,npassword);
+	  }
 }

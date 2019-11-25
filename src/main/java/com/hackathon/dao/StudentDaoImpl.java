@@ -2,6 +2,7 @@ package com.hackathon.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
@@ -40,20 +41,38 @@ public class StudentDaoImpl implements StudentDao {
 		return flag;
 	}
 
-	/*public boolean changepwd(String studentid,String opwd, String npwd) {
+	public boolean changepwd(String studentId,String opassword, String npassword) {
 		  boolean flag=false;
-		  EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
-		  EntityManager em = emf.createEntityManager();	  
-		  Query query = em.createQuery("update Student u set u.password=:npwd where u.studentid=:studentid and u.password=:opwd");
-		  query.setParameter("npwd", npwd);
-		  query.setParameter("opwd", opwd);
-		  query.setParameter("studentid", studentid);
-		  em.getTransaction().begin();
+		   
+		  Query query = em.createQuery("update Student u set u.password=:npassword where u.studentId=:studentId and u.password=:opassword");
+		  query.setParameter("studentId", studentId);
+		  query.setParameter("opassword", opassword);
+		  query.setParameter("npassword", npassword);
+		  
+		  
+		  
 		  int r = query.executeUpdate();
-		  em.getTransaction().commit();
+		  
 		  em.close();
 		  if(r>0)
 			  flag=true;
 		  return flag;
-	  }*/
+	  }
+	public boolean changepassword(String studentId,String opassword, String npassword) {
+		  boolean flag=false;
+		   
+		  Query query = em.createQuery("update Student u set u.password=:npassword where u.studentId=:studentId and u.password=:opassword");
+		  query.setParameter("studentId", studentId);
+		  query.setParameter("opassword", opassword);
+		  query.setParameter("npassword", npassword);
+		  
+		  
+		  
+		  int r = query.executeUpdate();
+		  
+		  em.close();
+		  if(r>0)
+			  flag=true;
+		  return flag;
+	  }
 }

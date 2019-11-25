@@ -1,5 +1,8 @@
 package com.hackathon.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -39,6 +42,25 @@ public class AdminDaoImpl implements AdminDaoIntf{
 				System.out.println("Error:"+e);
 			}
 			return flag;
+	}
+
+	public List<Subject> getSubjects() {
+		List<Subject> subjects = new ArrayList<Subject>();
+		subjects = em.createQuery("SELECT s from Subject s").getResultList();
+		return subjects;
+	}
+
+	public boolean removeQuestion(String questionId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean removeSubject(String subjectId) {
+		boolean flag = false;
+		Subject subject = em.find(Subject.class, subjectId);
+		em.remove(subject);
+		flag = true;
+		return flag;
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hackathon.model.Exam;
 import com.hackathon.model.Question;
+import com.hackathon.model.Score;
 import com.hackathon.model.Student;
 import com.hackathon.model.Subject;
 import com.hackathon.service.ExamService;
@@ -71,7 +73,7 @@ public class ExamController {
 		Exam exam = new Exam();
 		exam.setStudent(student);
 		exam.setSubject(subject);
-		exam.setExamId("E0001");
+		exam.setExamId(studentId+subject.getSubjectId());
 		examService.createExam(exam);
 		mav.addObject("subject", subject);
 		session.setAttribute("exam", exam);
@@ -103,6 +105,20 @@ public class ExamController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/finishexam")
+	public ModelAndView finishExam(HttpSession session){
+		ModelAndView mav = new ModelAndView();
+		boolean flag = examService.finishExam((Map<String, String>)session.getAttribute("questionmap"), (Exam)session.getAttribute("exam"));
+		
+		if(flag){
+			mav.setViewName("redirect:/report.do");
+			Score score = examService.calculateScore((Exam)session.getAttribute("exam"));
+		}
+			
+		else
+			mav.setViewName("error");
+		return mav;
+	}
 	/*@RequestMapping(value="/setanswer", method = RequestMethod.POST)
 	public ModelAndView setAnswer(HttpServletRequest request, HttpSession session, RedirectAttributes ra) {
 		ModelAndView mav = new ModelAndView();

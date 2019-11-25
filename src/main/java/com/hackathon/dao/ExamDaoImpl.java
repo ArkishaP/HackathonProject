@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
+import com.hackathon.model.Answer;
 import com.hackathon.model.Exam;
 import com.hackathon.model.Question;
 import com.hackathon.model.Score;
@@ -76,6 +77,17 @@ public class ExamDaoImpl implements ExamDao {
 	//create Exam
 	public void createExam(Exam exam) {
 		em.persist(exam);
+	}
+	
+	//get exam for id
+	public Exam getExam(String examId) {
+		Exam exam = em.find(Exam.class, examId);
+		return exam;
+	}
+	
+	public boolean addAnswer(Answer answer) {
+		em.persist(answer);
+		return true;
 	}
 /*
 	// get list of difficulty given a subject name
@@ -241,4 +253,16 @@ public class ExamDaoImpl implements ExamDao {
 		}
 		
 */
+
+	@SuppressWarnings("unchecked")
+	public List<Answer> getAnswers(Exam exam) {
+		
+		return (List<Answer>)em.createQuery("SELECT a from Answer a WHERE a.exam=:exam")
+				.setParameter("exam", exam)
+				.getResultList();
+	}
+
+	public void createScore(Score score){
+		em.persist(score);
+	}
 }

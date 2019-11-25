@@ -4,32 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Login Page</title>
-<style >
-/* body{
-background-image: url('./image/image1.jpg');
-height:100vh;
-backgroung-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-} */
-/* div {
-  height:20%;
-  width:20%;
- /*  padding:30px; */
- /*  border: 3px solid gray;
-  margin: 0;
-  text-align:center;
- 
-}
-.button1{
- background-color: #4CAF50;
+<title>Insert title here</title>
+<style>
 
+.error{
+    color: crimson;
 }
-.button2{
- background-color:crimson;
-
-}  */
 
  body {
  		background-image: url('./resources/img/pencil.jpg');
@@ -160,73 +140,84 @@ background-repeat:no-repeat;
 
 
 </style>
+  <script>
 
- </head>
- <body>
+		function valid()
+		{   var opassword=document.getElementById('opassword').value;
+		    var npassword=document.getElementById('npassword').value;
+		    
+		    
+		     var id1=document.getElementById('id1');
+	         var id2=document.getElementById('id2');
+	         
+	        
+	         var npasswordregex=/^[a-zA-Z)0-9$#@]{6,}$/;
+	         
+	         var flag=true;
+	         id1.innerHTML='';
+	         id2.innerHTML='';
+	         
+	         if(opassword=='')
+	         {
+	            id1.innerHTML='Please fill password';
+	            flag=false;
+	         }
+	        
+	         
+	         if(npassword=='')
+	         {
+	            id2.innerHTML='Please fill password';
+	            flag=false;
+	         }
+	        else
+	         if(npasswordregex.test(password)==false)
+	        {
+	          id2.innerHTML="Please fill correct password";
+	          
+	          flag=false;
+
+	        }
+	         return flag;
+		
+		}
+
+</script>
+</head>
+<body>
 <div class="main">
-    <p class="sign" align="center">Sign in</p>
-<Form action="login.do" name="Login Form" method="post">
-        <center>
-            <table>
-                <tr>
-                    <th> Student id:</th>
-                    <td> <input  class="un" type="text" align="center" placeholder="studentid" name='studentid' id="studentid" ></input>
-                   
-                    </td>
-                </tr>
-                
-                <tr>
-                    <th> Password:</th>
-                    <td> <input  class="pass" type="password" align="center" placeholder="password" name='password' id="password"  ></input>
-                  
-                    </td>
-                </tr>
-				<tr>
-				<td></td>
-                <th><a href="forgetpassword.do" >forget password ?</a></th>
-				</tr>
-				<tr>
-				<td></td>
-                <th><a href="changepwd.do" >Change Password ?</a></th>
-				</tr>
-                <tr>
-						<td colspan="1"><a href="register.do" class="submit">Register</a></td>
-						<td colspan="1">
-                        <input type="submit" class="login" align="center" value="Login">
-                        
-                        <!-- <input type="reset" value='Clear'> -->
-                        </td>
-                </tr>
-                <tr>
-				<td></td>
-				
-			</tr>
+<p class="sign" align="center">Change Password</p>
+	<form   action="changepassword.do" method="post" onsubmit="return valid()">
+	<center>
+		<table align="center">
 			
-                 </table>
-				<div Style="font-style: italic; color: red;">${message}</div>
-        </center>
-    </Form>
-    
-    <%-- <table align="center">
-		<tr>
-			<td style="font-style: italic; color: red;">${message}</td>
-		</tr>
-	</table> --%>
+			<tr>
+				<td>Old Password:</td>
+				<td><input class="pass" type="password" align="center"  placeholder="Old password" name="opassword" id="opassword" />
+				<div id='id1' class="error"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>New Password:</td>
+				<td><input class="pass" type="password" align="center"  placeholder="New password" name="npassword" id="npassword" />
+				<div id='id2' class="error"></div>
+				</td>
+			</tr>
+						
+			<tr>
+				<td></td>
+				 <td align="center"><input type="submit" class= "login" id="login" name="Update_Password" value="Update Password"></td>
+				<!-- <td colspan="1">
+                        <input type="submit" class="login" align="center"  id="login" name="Update_Password"  value="Update Password">
+                        
+                        <input type="reset" value='Clear'>
+                        </td> -->
+			</tr>
+			<tr>
+			<div Style="font-style: italic; color: red;">${message}</div>
+			</tr>
+		</table>
+		</center>
+	</form>
 	</div>
-</body> 
-
-<!-- <body>
-  <div class="main">
-    <p class="sign" align="center">Sign in</p>
-    <form class="form1">
-      <input class="un " type="text" align="center" placeholder="Username">
-      <input class="pass" type="password" align="center" placeholder="Password">
-      <a class="submit" align="center">Sign in</a>
-      <p class="forgot" align="center"><a href="#">Forgot Password?</p>
-            
-                
-    </div>
-     
 </body>
- -->
 </html>

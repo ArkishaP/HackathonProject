@@ -21,7 +21,14 @@ public class AdminController {
 	AdminDaoIntf admindao;
 	@Autowired
 	AdminServiceIntf adminservice;
+/*	adminDashboard.do*/
 	
+	@RequestMapping(value = "/adminDashboard", method = RequestMethod.GET)
+	public ModelAndView Dashboard() {
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("AdminDashboard");
+		return mav;
+	 }
 	@RequestMapping(value = "/adminLogin", method = RequestMethod.GET)
 	public ModelAndView loginAdmin() {
 		ModelAndView mav=new ModelAndView();
@@ -60,8 +67,25 @@ public class AdminController {
 		return mav;
 	  }
 
+	@RequestMapping(value="/viewsubjects")
+	public ModelAndView viewSubjects(){
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("subjects",adminservice.getSubjects());
+		mav.setViewName("ViewSubjects");
+		return mav;
+	}
 	
-	@RequestMapping(value="/addsubject", method=RequestMethod.GET)
+	@RequestMapping(value="/remove")
+	public ModelAndView removeSubject(HttpServletRequest request){
+		ModelAndView mav = new ModelAndView();
+		String subjectId = request.getParameter("subject");
+		boolean flag = adminservice.removeSubject(subjectId);
+		
+			mav.setViewName("ViewSubjects");
+		return mav;
+	}
+	
+	/*@RequestMapping(value="/addsubject", method=RequestMethod.GET)
 	public ModelAndView addSubject(){
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("upload");
@@ -98,7 +122,7 @@ public class AdminController {
 		return mav;
 		
 
-	}
+	}*/
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public ModelAndView userlogout(HttpServletRequest request) {
 		 HttpSession session =request.getSession(false);

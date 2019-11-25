@@ -8,13 +8,60 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="./resources/js/jquery.min.js"></script>
 <script type="text/javascript">
+$(window).on('pageshow', function() {
+	var test = $(".question").val();
+	var option = "${questionmap[question.questionId]}";
+	switch (option) {
+	  case $('#option1').val():
+		  console.log("option1");
+		$("#option1").prop('checked', true);
+	    break;
+	  case $('#option2').val():
+		  console.log("option2");
+			$("#option2").prop('checked', true);
+		    break;
+	  case $('#option3').val():
+		  console.log("option3");
+			$("#option3").prop('checked', true);
+		    break;
+	  case $('#option4').val():
+		  console.log("option4");
+			$("#option4").prop('checked', true);
+		    break;
+	}
+	console.log(test);
+	console.log(option);
+});
 	$(document).ready(function(){
 		$(".questiono-form").submit(function(e){
 			e.preventDefault();
+			
 			$(".questionId").val($(".question").val());
 			$(".response").val($("input[name=option]:checked").val());
 			this.submit();
 		});
+	});
+	//countdown timer - seconds
+	function startTimer(duration, display) {
+	    var timer = duration, minutes, seconds;
+	    setInterval(function () {
+	        minutes = parseInt(timer / 60, 10)
+	        seconds = parseInt(timer % 60, 10);
+
+	        minutes = minutes < 10 ? "0" + minutes : minutes;
+	        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+	        display.text(minutes + ":" + seconds);
+
+	        if (--timer < 0) {
+	            $(".finish").click();
+	        }
+	    }, 1000);
+	}
+	jQuery(function ($) {
+	    var fiveMinutes = 5,
+	        display = $('#countdown');
+	    startTimer(fiveMinutes, display);
 	});
 </script>
 </head>
@@ -38,19 +85,22 @@
 		<c:set var="count" value="${count+1 }"/>
 	</c:forEach>
 </div>
+<hr>
+<div id="countdown"></div>
+<hr>
 <div>
 <!-- 	<form class="question-form" action="setanswer.do" method="POST"> -->
 	${question.question }<br>
 	<input type="hidden" name="questionId" class="question" value="${question.questionId }"/>
-	<input type="radio" name="option" value="${question.option1 }">${question.option1 }
-	<input type="radio" name="option" value="${question.option2 }">${question.option2 }
-	<input type="radio" name="option" value="${question.option3 }">${question.option3 }
-	<input type="radio" name="option" value="${question.option4 }">${question.option4 }
+	<input type="radio" name="option" id="option1" value="${question.option1 }">${question.option1 }
+	<input type="radio" name="option" id="option2" value="${question.option2 }">${question.option2 }
+	<input type="radio" name="option" id="option3" value="${question.option3 }">${question.option3 }
+	<input type="radio" name="option" id="option4" value="${question.option4 }">${question.option4 }
 <!-- 	</form> -->
 </div>
 ${question }
 <br>
-<a href="report.do">Finish Exam</a>
+<a href="finishexam.do" class="finish">Finish Exam</a>
 
 </body>
 </html>

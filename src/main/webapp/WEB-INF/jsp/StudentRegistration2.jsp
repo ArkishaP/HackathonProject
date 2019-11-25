@@ -10,7 +10,7 @@
     color: crimson;
 }
 body {
- 		 background-image: url('./img/image1.jpg'); 
+ 		 background-image: url('./resources/img/pencil.jpg'); 
        /*  background-color: pink; */
         font-family: 'Ubuntu', sans-serif;
     }

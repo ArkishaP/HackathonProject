@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -36,7 +38,7 @@ public class Exam {
 	private Date dateOfExam;
 	@Column(name="time_taken")
 	private int timeTaken;
-	
+
 	public String getExamId() {
 		return examId;
 	}
