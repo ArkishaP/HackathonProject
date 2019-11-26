@@ -29,3 +29,19 @@ body{
     background-color: aliceblue;
     text-align: center;
 }
+
+.btn{
+	color: black;
+	background-color:aliceblue;
+	padding:15px;
+	border-radius: 15px;
+	text-decoration: none;
+}
+.btn:hover{
+	color: aliceblue;
+	background-color:black;
+	padding:15px;
+	font-weight: bold;
+	border-radius: 15px;
+	text-decoration: none;
+}

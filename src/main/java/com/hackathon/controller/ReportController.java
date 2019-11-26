@@ -21,6 +21,17 @@ public class ReportController {
 	@Autowired
 	ReportService reportservice;
 
+	@RequestMapping(value = "/viewGraph", method = RequestMethod.GET)
+	public ModelAndView Graph(HttpSession session) {
+		ModelAndView mav=new ModelAndView();
+		String studentId=(String) session.getAttribute("studentId");
+		
+		List<Object[]>  replist = reportservice.getReport(studentId);
+		 mav.addObject("replist", replist);
+		mav.setViewName("viewGraph");
+		return mav;
+	 }
+	
 	@ModelAttribute("sublist")
 	public List<String>  getSubjectStatus() {
 		List<String> sublist = reportservice.getSubjectlist();
@@ -35,11 +46,15 @@ public class ReportController {
 	
 	@RequestMapping(value = "/report", method = RequestMethod.GET)
 	public ModelAndView viewReport(HttpServletRequest request, HttpServletResponse response,HttpSession session) {
+		 ModelAndView mav = new ModelAndView();
 		String studentId=(String) session.getAttribute("studentId");
+		if(null==session.getAttribute("studentId")){
+			mav.setViewName("redirect:/index.do");
+		}else{
 		List<Object[]>  replist = reportservice.getReport(studentId);
-		
-		 ModelAndView mav = new ModelAndView("report");
+		mav.setViewName("report");
 		 mav.addObject("replist", replist);
+		}
 		 return mav;
 	 }
 	
@@ -57,15 +72,7 @@ public class ReportController {
 		String subName=request.getParameter("subName");
 		String difficulty= request.getParameter("difficulty");
 		int score = Integer.parseInt(request.getParameter("score"));
-		String astatus= request.getParameter("astatus");
-		System.out.println(subName);
-		System.out.println(difficulty);
-		System.out.println(score);
-		
 		List<Object[]>  stlist = reportservice.searchStudent(subName, difficulty, score);
-		
-		//System.out.println("idhar");
-		System.out.println(stlist.size());
 		ModelAndView mavv = new ModelAndView();
 		 mavv.setViewName("SearchedResult");
 		 mavv.addObject("stlist", stlist);

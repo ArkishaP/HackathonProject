@@ -1,0 +1,37 @@
+/* Style the top navigation bar */
+.topnav {
+  overflow: hidden;
+  background-color: #000000;
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  display: block;
+  color: #ffffff;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+background-color: aliceblue;
+ color:black;
+}
+
+.btn{
+	color: black;
+	background-color:aliceblue;
+	padding:15px;
+	border-radius: 15px;
+	text-decoration: none;
+}
+.btn:hover{
+	color: aliceblue;
+	background-color:black;
+	padding:15px;
+	font-weight: bold;
+	border-radius: 15px;
+	text-decoration: none;
+}

@@ -4,13 +4,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="./resources/css/exam.css">
 <title>Insert title here</title>
 </head>
 <body>
-<%-- The exam is for ${exam} --%>
-${subject.difficulty }
-The exam will be of ${subject.duration } minutes.
-${subject.subjectId }
-<a href="startexam.do">Start Exam</a>
+	<div class="container" style="min-height:'500px'">
+		<div>${subject.subjectName } ${subject.difficulty }</div>
+		The exam will be of ${subject.duration } minutes.
+		<div>Best of luck!</div>
+		<a href="startexam.do" class="btn">Start Exam</a>
+	</div>
 </body>
 </html>

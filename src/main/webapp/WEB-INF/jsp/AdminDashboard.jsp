@@ -91,18 +91,26 @@ a{
 
 
 <div class="wrapper">
+ <a href="welcome.do">
     <div class="one" id="boom">
-        <a href="welcome.do">Add Question</a>
+       Add Question File
     </div>
+ </a>
+ <a href="viewsubjects.do">
     <div class="two" id="boom">
-        <a href="#">Remove Question</a>
+        View Subjects
     </div>
+ </a>
+ <a href="adminSearch.do">
     <div class="three" id="boom">
-        <a href="#">Search Students</a>
+       Search Students
     </div>
+ </a>
+ <a href="#">
     <div class="four" id="boom">
-        <a href="#">Admin Approval</a>
+    	Admin Approval
     </div>
+ </a>
     
 
   </div>

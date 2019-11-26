@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <title>Insert title here</title>
 <style>
 
@@ -135,6 +136,47 @@
     @media (max-width: 600px) {
         .main {
             border-radius: 0px;
+            }
+            }
+            .tooltip {        
+     position: relative;
+     bottom:40px; 
+     left:10px;
+     display: inline;
+     font-size:12px;
+     /* border-bottom: 1px dotted black; */
+     }
+     .tooltip .tooltiptext {
+    visibility: hidden;
+    height:50px;
+    width: 250px;
+  	background-color: #555;
+  	color: #fff;
+  	text-align: center;
+  	border-radius: 20px;
+  	padding: 5px 0;
+  	position: absolute;
+  	z-index: 1;
+  	bottom: 125%;
+  	left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+     .tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
         }
         
 
@@ -220,6 +262,9 @@
 			<tr>
 				<td>New Password:</td>
 				<td><input class="pass" type="password" align="center"  placeholder="New password" name="npassword" id="npassword" />
+				<div class="tooltip"><i style='font-size:24px' class='fas'>&#xf501;</i>
+  			`	<span class="tooltiptext">Atleast 6 characters,including alphabets,numbers and special characters</span>
+				</div>
 				<div id='id3' class="error"></div>
 				</td>
 			</tr>

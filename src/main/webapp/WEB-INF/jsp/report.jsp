@@ -8,17 +8,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="./resources/css/style.css">
 <link rel="stylesheet" href="css/mycss.css">
 
 <title>Report</title>
 </head>
 <style>
+body{
+	margin:0;
+}
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
 }
 </style>
-<body bgcolor="#FDF5E6">
+<body bgcolor="aliceblue">
 <script>
 function myf1(){
 	
@@ -30,11 +34,20 @@ function myf2(){
 	window.location="login.do";
 	
 }
+function myfun(){
+	
+	window.location="viewGraph.do";
+	
+}
 
 </script>
-<a href="studentlogout.do">Logout</a>
-<button type="submit" name="home" id="b1" value="text" style="float:left" onclick="myf1();">HOME</button>
-<button type="submit" name="logout" id="b2" value="text" style="float:right" onclick="myf2();">LOGOUT</button>
+ <header class="topnav">
+        <nav>
+        <a href="studentlogout.do" style="width:auto;float:right; font-weight:bold">Logout</a>
+        <a href="dashboard.do" style="width:auto;float:right;float:top; font-weight:bold">New Exam</a>
+        <a href="changepassword.do" style="width:auto;float:right;float:top; font-weight:bold">Change Password</a>
+        </nav>
+    </header>
 
 <center><h2>WELCOME TO STUDENT'S REPORT</h2>
  <hr size="4" color="gray"/>
@@ -46,10 +59,8 @@ function myf2(){
 <th><b>Student Name </b></th>
 <th><b>Subject Name </b></th>
 <th><b>Level </b></th>
-<th><b>Report ID </b></th>
 <th><b>Score </b></th>
-<th><b>Exam ID </b></th>
-<th><b>Certificate</b>
+<th><b>View Graph</b></th>
 </tr>
 
 <c:forEach items="${replist}" var="report">
@@ -59,10 +70,8 @@ function myf2(){
 <td>${report[1]}</td> 
 <td>${report[2]}</td> 
 <td>${report[3]}</td> 
-<td>${report[4]}</td>
 <td>${report[5]}</td> 
-<td>${report[6]}</td>
- <td><button type="submit" value="download" id="download">DOWNLOAD</button>
+<td><button type="submit"  name="b3" id="b3" onclick="myfun();">View Graph</button>
 
 </tr>  
                

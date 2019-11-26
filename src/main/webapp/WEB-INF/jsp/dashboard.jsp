@@ -5,11 +5,28 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="./resources/css/style.css">
 <link rel="stylesheet" href="./resources/css/exam.css">
 <title>Insert title here</title>
+<style>
+	.error{
+		color:red;
+		font-size:14px;
+		font-style:italic;
+	}
+</style>
 </head>
 <body>
+ <header class="topnav">
+        <nav>
+        <a href="studentlogout.do" style="width:auto;float:right; font-weight:bold">Logout</a>
+        <a href="report.do" style="width:auto;float:right;float:top; font-weight:bold">Report</a>
+        <a href="changepassword.do" style="width:auto;float:right;float:top; font-weight:bold">Change Password</a>
+        </nav>
+    </header>
+
 <div class="container">
+<div class="error">${message }</div>
 	<div><h1>Select exam</h1></div>
     <div class="grid-container">
     	<c:forEach items="${subjects}" var="subject">

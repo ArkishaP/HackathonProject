@@ -183,7 +183,7 @@ background-repeat:no-repeat;
                 </tr>
 				<tr>
 				<td></td>
-                <th><a href="forgetpassword.do" >forget password ?</a></th>
+                <th><a href="#" >forget password ?</a></th>
 				</tr>
 				<tr>
 				<td></td>

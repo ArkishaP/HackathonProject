@@ -5,10 +5,42 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="./resources/css/admin.css">
+<style>
+
+table{
+		color:white;
+		font-size:18px;
+		
+	}
+	.ucontainer {
+            text-align: center;
+            width: 50%;
+            padding: 30px;
+            background-color: rgba(255, 255, 255,0.1);
+            margin: auto;
+            margin-top: 8%; 
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        }
+      a{
+      	color:white;
+      }
+      a:hover{
+      	font-weight:bold;
+      }
+      th{
+      	color: rgb(255, 165, 132);
+      }
+	
+</style>
 <title>Insert title here</title>
 </head>
 <body>
-	<table>
+<div class="topnav">
+   <%@include file="adminmenu.html" %>
+</div>
+<div class="ucontainer">
+	<table cellspacing="20px">
 		<tr>
 			<th>Subject Id</th>
 			<th>Subject Name</th>
@@ -28,5 +60,6 @@
 			</tr>
 		</c:forEach>
 	</table>
+	</div>
 </body>
 </html>

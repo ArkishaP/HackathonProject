@@ -23,9 +23,12 @@ public class StudentController {
 	StudentService studentService;
 	
 	@RequestMapping(value="/register", method=RequestMethod.GET)
-	public ModelAndView getRegister(){
+	public ModelAndView getRegister(HttpSession session){
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName("StudentRegistration2");
+		if(null==session.getAttribute("studentId"))
+			mav.setViewName("StudentRegistration2");
+		else
+			mav.setViewName("redirect:/dashboard.do");			
 		return mav;
 	}
 	
@@ -72,9 +75,12 @@ public class StudentController {
 
 	}
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView loginUserget() {
+	public ModelAndView loginUserget(HttpSession session) {
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName("login2");
+		if(null==session.getAttribute("studentId"))
+			mav.setViewName("login2");
+		else
+			mav.setViewName("redirect:/dashboard.do");
 		return mav;
 	 }
 	
@@ -98,9 +104,10 @@ public class StudentController {
 			HttpSession session = request.getSession();
 			session.setAttribute("studentId", studentId);
 		}
-			else
-			mav.setViewName("login2");
-			mav.addObject("message","Invalid Details");
+			else{
+				mav.setViewName("login2");
+				mav.addObject("message","Invalid Details");
+			}
 		return mav;
 	  }
 	@RequestMapping(value = "/studentlogout", method = RequestMethod.GET)

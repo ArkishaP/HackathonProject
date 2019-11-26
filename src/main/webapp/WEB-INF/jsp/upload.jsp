@@ -36,6 +36,14 @@
 .error{
     color: crimson;
 }
+.form-element input, select {
+            display: block;
+            width: 80%;
+            height: 30px;
+            margin: auto;
+            background-color: rgb(235, 232, 232);
+            border-radius: 20px;
+        }
 </style>
 <script>
 
@@ -52,6 +60,8 @@ function valid(event){
 	    var id3=document.getElementById('id3');
 	    var id4=document.getElementById('id4');
 	    var id5=document.getElementById('id5');
+	    
+	    subidregex=/^[A-Z]{3}[1-3]{1}$/
 	    
 	    if(subid=='')
 	    {
@@ -112,7 +122,11 @@ function valid(event){
 	<br>
 	<div class="form-element">
 	Set Difficulty:
-	<input type="text" name="level" id="level" placeholder="Level">
+	<select name="level">
+		<option value="Level 1">Level 1</option>
+		<option value="Level 2">Level 2</option>
+		<option value="Level 3">Level 3</option>
+	</select>
 	<div id='id3' class="error"></div>
 	</div>
 	<br>
@@ -129,19 +143,10 @@ function valid(event){
 	<div id='id5' class="error"></div>
 	<br>
 	 <button type="submit" class="btn">Submit</button>
-	<!-- <input type="submit" value="Submit"> -->
 </form>
 	
 	<div style="font-style: italic; color: red;">${message}</div>	
 	
 </div>
-	<%-- <form method="POST" action="${pageContext.request.contextPath}/upload.do" enctype="multipart/form-data">
-	Upload your Question file here:<br>
-	<input type="file" name="file"><br>
-    <input type="submit" value="Submit">
-</form> --%>
-<%-- 
-<h3>Upload Status</h3>
-<h3>Message : ${message}</h3> --%>
 </body>
 </html>

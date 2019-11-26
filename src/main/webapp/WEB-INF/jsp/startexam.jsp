@@ -13,7 +13,7 @@
 </script>
 </head>
 <body>
-${subject }
+<%-- ${subject } --%>
 <form action="exam.do" method="POST">
 	<input type="hidden" name="question" value="${subject.questions[0].questionId }">
 	<br>

@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <title>SignUp form</title>
 <style>
 .error{
@@ -132,7 +133,46 @@ body {
         .main {
             border-radius: 0px;
         }
-        
+        }
+    .tooltip {        
+     position: relative;
+     bottom:40px; 
+     left:10px;
+     display: inline;
+     font-size:12px;
+     /* border-bottom: 1px dotted black; */
+     }
+     .tooltip .tooltiptext {
+    visibility: hidden;
+    height:50px;
+    width: 250px;
+  	background-color: #555;
+  	color: #fff;
+  	text-align: center;
+  	border-radius: 20px;
+  	padding: 5px 0;
+  	position: absolute;
+  	z-index: 1;
+  	bottom: 125%;
+  	left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+     .tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
 
 
 </style>
@@ -273,9 +313,9 @@ body {
         else{
          var date1=new Date();
          var date2=new Date(dob);
-         if(date1.getFullYear()-date2.getFullYear()<18)
+         if(date1.getFullYear()-date2.getFullYear()<10)
          {   
-			id7.innerHTML="AGE SHOULD BE 18 YEARS";
+			id7.innerHTML="AGE SHOULD BE 10 YEARS";
 			flag=false;
 		}
 		}
@@ -349,37 +389,54 @@ body {
                 <tr>
                     <th> Student id:</th>
                     <td> <input type="text"  class="un" placeholder="studentid" name='studentid' id="studentid"></input>
+                    <div class="tooltip"><i style='font-size:24px' class='fas'>&#xf501;</i>
+  			`		<span class="tooltiptext">Minimum 5 characters,upper case and lower case alphabets can be used.</span>
+					</div>
                    <div id='id1' class="error"></div>
+                  
                     </td>
+                    </div>
                 </tr>
                 <tr>
                     <th>First Name:</th>
                     <td> <input type="text"  class="un"  placeholder="first name" name='fname' id="fname"></input>
+                    <div class="tooltip"><i style='font-size:24px' class='fas'>&#xf501;</i>
+  			`		<span class="tooltiptext">minimum 4 characters,should be written in capital and small letters both</span>
+					</div>
                     <div id='id2' class="error"></div> 
                     </td>
                 </tr>
                 <tr>
                     <th>Last Name:</th>
                     <td> <input type="text"  class="un"  placeholder="last name" name='lname' id="lname"></input>
+                    <div class="tooltip"><i style='font-size:24px' class='fas'>&#xf501;</i>
+  			`		<span class="tooltiptext">minimum 4 characters,should be written in capital and small letters both</span>
+					</div>
                      <div id='id3' class="error"></div> 
                     </td>
                 </tr>
                 <tr>
                     <th>Gender:</th>&nbsp &nbsp &nbsp
                     <td align="center"> <input type="radio"   name="gender" value="male" checked>Male</input>
-                    <input type="radio" name="gender" value="female" >Female</input>
+                    <input type="radio" name="gender" value="female" >Female</input><br><br>
                     
                     </td>
                 </tr>
                  <tr>
                         <th> Email id:</th>
                         <td> <input type="email"  class="un"  name='email'  placeholder="abcdefgh@gmail.com" id="email"></input>
+                        <div class="tooltip"><i style='font-size:24px' class='fas'>&#xf501;</i>
+  			`			<span class="tooltiptext">@ example: abcdef@abcd.abc or ab12cd@abcd.abc</span>
+						</div>
                          <div id='id5' class="error"></div>
                         </td>
                 </tr>
                 <tr>
                     <th> Password:</th>
                     <td> <input type="password"  class="pass"  placeholder="password" name='password' id="password"  ></input>
+                    <div class="tooltip"><i style='font-size:24px' class='fas'>&#xf501;</i>
+  			`		<span class="tooltiptext">Atleast 6 characters,including alphabets,numbers and special characters</span>
+					</div>
                      <div id='id6' class="error"></div>
                     </td>
                 </tr>
@@ -404,6 +461,9 @@ body {
                 <tr>
                         <th> Contact no.: </th>
                         <td> <input type="text"  class="un"   name='phoneno'  id="phoneno"></input>
+                        <div class="tooltip"><i style='font-size:24px' class='fas'>&#xf501;</i>
+  			`			<span class="tooltiptext">@ example: +91-1234567890</span>
+						</div>
                         <div id='id10' class="error"></div> 
                         </td>
                 </tr>
