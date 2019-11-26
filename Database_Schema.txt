@@ -1,0 +1,55 @@
+CREATE TABLE student(
+	id VARCHAR2(20) NOT NULL PRIMARY KEY,
+	first_name VARCHAR2(50),
+	last_name VARCHAR2(50),
+	gender VARCHAR2(10),
+	email VARCHAR2(100),
+	password VARCHAR2(100),
+	birth_date DATE,
+	city VARCHAR2(50),
+	state VARCHAR2(50),
+	contact_number VARCHAR2(20),
+	file_name VARCHAR2(100)	
+);
+
+CREATE TABLE subject(
+	id VARCHAR2(4) NOT NULL PRIMARY KEY,
+	name VARCHAR2(50),
+	difficulty VARCHAR2(20),
+	duration NUMBER(10),
+	question_file varchar2(30)	
+);
+
+CREATE TABLE question(
+	id VARCHAR2(10) NOT NULL PRIMARY KEY,
+	subject_id VARCHAR2(10) REFERENCES subject(id),
+	question VARCHAR2(500),
+	option1 VARCHAR2(500),
+	option2 VARCHAR2(500),
+	option3 VARCHAR2(500),
+	option4 VARCHAR2(500),
+	correct_answer VARCHAR2(500)
+);
+
+CREATE TABLE exam(
+	id VARCHAR2(20) NOT NULL PRIMARY KEY,
+	student_id VARCHAR2(10) REFERENCES student(id),
+	subject_id VARCHAR2(10) REFERENCES subject(id),
+	date_of_exam DATE,
+	time_taken NUMBER(10)
+);
+
+
+CREATE TABLE answer(
+	id VARCHAR2(20) NOT NULL PRIMARY KEY,
+	exam_id varchar2(20) REFERENCES exam(id),
+	question_id VARCHAR2(20) REFERENCES question(id),
+	response VARCHAR2(500),
+	correct VARCHAR2(10)
+);
+
+CREATE TABLE SCORE(
+	id VARCHAR2(20) NOT NULL PRIMARY KEY,
+	exam_id varchar2(20) REFERENCES exam(id),
+	score INT
+);
