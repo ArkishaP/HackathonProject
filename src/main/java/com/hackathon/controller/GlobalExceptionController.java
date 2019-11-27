@@ -13,10 +13,14 @@ public class GlobalExceptionController {
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ModelAndView handleError405(HttpServletRequest request, Exception e) {
-        ModelAndView mav = new ModelAndView("/exceptions/405");
-        mav.addObject("exception", e);  
-        //mav.addObject("errorcode", "405");
+        ModelAndView mav = new ModelAndView("redirect:/dashboard.do");
         return mav;
+    }
+    
+    @ExceptionHandler(NumberFormatException.class)
+    public ModelAndView adminupload(){
+    	ModelAndView mav = new ModelAndView("redirect:/dashboard.do");
+    	return mav;
     }
     
     @ExceptionHandler(DataIntegrityViolationException.class)

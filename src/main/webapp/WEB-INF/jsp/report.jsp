@@ -36,7 +36,7 @@ function myf2(){
 }
 function myfun(){
 	
-	window.location="viewGraph.do";
+	window.location="viewGraph.do?";
 	
 }
 
@@ -71,7 +71,7 @@ function myfun(){
 <td>${report[2]}</td> 
 <td>${report[3]}</td> 
 <td>${report[5]}</td> 
-<td><button type="submit"  name="b3" id="b3" onclick="myfun();">View Graph</button>
+<td><a type="submit" href="viewGraph.do?exam=${report[4] }"  name="b3" id="b3" onclick="myfun();">View Graph</button>
 
 </tr>  
                

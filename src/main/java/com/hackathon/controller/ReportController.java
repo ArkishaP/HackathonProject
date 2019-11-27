@@ -22,10 +22,10 @@ public class ReportController {
 	ReportService reportservice;
 
 	@RequestMapping(value = "/viewGraph", method = RequestMethod.GET)
-	public ModelAndView Graph(HttpSession session) {
+	public ModelAndView Graph(HttpSession session, HttpServletRequest request) {
 		ModelAndView mav=new ModelAndView();
 		String studentId=(String) session.getAttribute("studentId");
-		
+		mav.addObject("exam",request.getParameter("exam"));
 		List<Object[]>  replist = reportservice.getReport(studentId);
 		 mav.addObject("replist", replist);
 		mav.setViewName("viewGraph");

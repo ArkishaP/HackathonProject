@@ -18,7 +18,6 @@ public class StudentDaoImpl implements StudentDao {
 		try{
 			em.persist(student);
 			flag = true;
-//			System.out.println("Student called");
 			}catch(Exception e){
 				System.out.println("Error:"+e);
 			}

@@ -111,6 +111,7 @@
 			float:right;
 			float:bottom;
 		}
+
 	</style>
 </head>
 
@@ -126,7 +127,7 @@
 					<input type="hidden" name="response" class="response" value="" />
 					<input type="hidden" name="startTimeMin" class="startTimeMin" value=""/>
 					<input type="hidden" name="startTimeSec" class="startTimeSec" value=""/>
-					<input type="submit" value="${count+1 }" class="num" />
+					<input type="submit" value="${count+1 }" id="${subject.questions[count].questionId }" class="num" />
 				</form>
 				<c:set var="count" value="${count+1 }" />
 			</c:forEach>

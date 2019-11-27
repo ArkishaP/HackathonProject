@@ -123,15 +123,12 @@ footer{
 }
 
 </style>
-<script>
-	$(document).ready(function(){
-		$(window).on("pageshow",function(){
-			window.location="index.do";
-		})
-	})
-</script>
 </head>
+
 <body>
+<%
+	if(null==session.getAttribute("studentId")){
+%>
  <header class="topnav">
       <div class="container">
         <div id="branding">
@@ -164,7 +161,14 @@ footer{
 <footer>
       <p>Hackathon group</p>
 </footer>
-	
+	<%
+	}else{
+		%>
+		<script>
+			window.location="index.do"
+		</script>
+	<%}
+	%>
  
  </body>
 </html>

@@ -115,7 +115,6 @@ public class StudentController {
 		 HttpSession session =request.getSession(false);
 		 session.invalidate();
 		 ModelAndView mav = new ModelAndView();
-		 /*mav.addObject("login2");*/
 		 mav.setViewName("login2");
 		 return mav;
 	 }
@@ -137,7 +136,6 @@ public class StudentController {
 	boolean flag = studentService.changepwd(studentId,opassword,npassword);
     if(flag) {
 	       ModelAndView mav = new ModelAndView("login2");
-	       /*mav.addObject("message", "Password is successfully updated");*/
 	       return mav;
 	  }
     else {
@@ -163,7 +161,6 @@ public class StudentController {
 	boolean flag = studentService.changepassword(studentId,opassword,npassword);
   if(flag) {
 	       ModelAndView mav = new ModelAndView("login2");
-	       /*mav.addObject("message", "Password is successfully updated");*/
 	       return mav;
 	  }
   else {

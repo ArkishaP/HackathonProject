@@ -33,17 +33,5 @@ public interface ExamService {
 	
 	//
 	public Score calculateScore(Exam exam);
-/*	
-	//method to select level for student returns subjectId
-	public String selectExam(String studentId, String subjectName);
-	
-	//method to return exam id
-	public String startExam(String subjectId, String studentId);
-	
-	//generate questions
-	public List<Question> getQuestions(String subjectId);
-	
-	
-	*/
-	
+
 }

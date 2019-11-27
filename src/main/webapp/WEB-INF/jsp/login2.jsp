@@ -181,10 +181,10 @@ background-repeat:no-repeat;
                   
                     </td>
                 </tr>
-				<tr>
+<!-- 				<tr>
 				<td></td>
                 <th><a href="#" >forget password ?</a></th>
-				</tr>
+				</tr> -->
 				<tr>
 				<td></td>
                 <th><a href="changepwd.do" >Change Password ?</a></th>

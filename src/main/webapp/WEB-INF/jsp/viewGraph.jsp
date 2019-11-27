@@ -34,20 +34,20 @@
 <div class="Container">
 
 <c:forEach items="${replist}" var="report">
-
-
+<h2>${report[2] } ${report[3] }</h2>
 <div class="correct">
 <h3>Your Score ${report[5]} % :</h3>
 
 <div  style="background-color: green; height: 60px; width:${report[5]*3}px"></div>
 </div>
-<br>
-<br>
+
 <div class="incorrect">
 <h3>Error Percentage ${100-report[5]}% :</h3>
 
 <div  style="background-color: red; height: 60px; width:${(100-report[5])*3}px"></div>
 </div>
+<hr>
+<hr>
 <br>
  </c:forEach> 
 
